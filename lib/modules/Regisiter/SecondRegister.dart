@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/models/ModelRegister.dart';
-import 'package:gold_app/modules/Login/Shoplogin.dart';
+import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
 import 'package:gold_app/modules/Regisiter/register.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
@@ -146,7 +146,8 @@ class Second_register extends StatelessWidget {
                           defaultButton(
                               function: () {
     if (formkey.currentState!.validate()) {
-      ModelTalents model=ModelTalents(password:passwordController.text ,email:emailController.text ,phone:PhoneController.text ,fullName: nameController.text,gender: GenderController.text,);
+      int phone=int.parse(PhoneController.text);
+      ModelTalents model=ModelTalents(password:passwordController.text ,email:emailController.text ,phone:phone ,fullName: nameController.text,gender: GenderController.text,);
       navigateTo(context, Third_register(modelTalents:model));
 
 
@@ -171,7 +172,7 @@ class Second_register extends StatelessWidget {
                             ),
                             TextButton(
                                 onPressed: () {
-                                  navigateTo(context, Shoplogin());
+                                  navigateTo(context, HomeScreen());
                                 },
                                 child: Text(
                                   'Log In',

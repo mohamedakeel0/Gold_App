@@ -6,7 +6,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gold_app/models/ModelRegister.dart';
 import 'package:gold_app/modules/Login/cubic_login/states.dart';
+import 'package:gold_app/modules/Regisiter/cubic/states.dart';
 import 'package:gold_app/shared/network/End_point.dart';
 import 'package:gold_app/shared/network/remot/dio_helper.dart';
 
@@ -15,22 +17,28 @@ class ShoploginCubic extends Cubit<ShopLoginStates>{
   ShoploginCubic() : super(ShopLoginInitailState());
   static ShoploginCubic get(context) => BlocProvider.of(context);
 
-void userLogin({required email,required password
-}){
-emit(ShopLoginILoadingState());
-DioHelper.Postdata(url: TALENTREG, data: {
-'email':email,
-  'password':password
 
-},).then((value) {
-  print(value.data);
+  late ModelTalents modelTalents;
+  void userLogin(
+      {required email, required password }) {
+    emit(ShopLoginILoadingState());
+    DioHelper.Postdata(
+      url: SIGNIN,
+      data: { 'email': email,'password': password,
+
+      },
+    ).then((value) {
+      modelTalents= ModelTalents.fromJson(value.data);
+
+      print(value.data);
 
 
-  emit(ShopLoginSuccessState());
-}).catchError((error){
-emit(ShopLoginErrorState(error.toString()));
-});
-}
+      emit(ShopLoginSuccessState(modelTalents));
+    }).catchError((error) {
+      print(error.toString());
+      emit(ShopLoginErrorState(error.toString()));
+    });
+  }
   IconData suffix= Icons.visibility_outlined;
   bool isPassword=true;
   void changePasswordvisibility(){

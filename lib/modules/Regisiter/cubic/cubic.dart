@@ -18,12 +18,12 @@ class ShopRegisterCubic extends Cubit<ShopRegisterStates> {
 
   late ModelTalents modelTalents;
   void userRegister(
-      { required name,required phone,required email, required password ,required gender ,required List talents}) {
+      { required name,required phone,required email, required password ,required gender ,required  talents}) {
     emit(ShopRegisterILoadingState());
     DioHelper.Postdata(
-      url: TALENTREG,
-      data: {'name': name,
-     'phone': phone, 'email': email,'password': password,'gender': gender,'talents': talents,
+      url: TALENTREG,query: {'talented_reg':TALENTREG},
+      data: {'full_name': name,'email': email,
+     'phone': phone, 'password': password,'gender': gender,'talents': talents,
 
    },
     ).then((value) {

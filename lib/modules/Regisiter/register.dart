@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gold_app/modules/Login/Shoplogin.dart';
+import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/SecondRegister.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
 import 'package:gold_app/shared/style/colors.dart';
@@ -125,7 +125,7 @@ class shop_register extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 5),
                                   child: defaultButton(
                                       function: () {
-                                        navigateTo(context, Shoplogin());
+                                        navigateTo(context, HomeScreen());
                                       },
                                       text: 'back',
                                       shape: false,
@@ -168,7 +168,7 @@ class shop_register extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      navigateTo(context, Shoplogin());
+                                      navigateTo(context, HomeScreen());
                                     },
                                     child: Text(
                                       'Log In',
