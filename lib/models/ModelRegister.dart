@@ -1,7 +1,7 @@
 class ModelTalents {
   String? fullName;
   String? email;
-  String? phone;
+  int? phone;
   String? password;
   String? gender;
   List<String>? talents;
@@ -14,12 +14,12 @@ class ModelTalents {
         this.gender,
         this.talents});
   ModelTalents.fromJson(Map<String, dynamic> json) {
-    fullName = json['full_name'];
+    fullName = json['full_namee'];
     email = json['email'];
     phone = json['phone'];
     password = json['password'];
     gender = json['gender'];
-    talents = json['talents'].cast<String>();
+    talents = json['talents'];
   }
 
 

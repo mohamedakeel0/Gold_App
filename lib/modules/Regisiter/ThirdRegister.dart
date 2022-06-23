@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/models/ModelRegister.dart';
-import 'package:gold_app/modules/Login/Shoplogin.dart';
+import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/register.dart';
 import 'package:gold_app/modules/first/firstscreen.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
@@ -171,7 +171,7 @@ class Third_register extends StatelessWidget {
                           TextButton(
                               onPressed: () {
 
-                                navigateTo(context, Shoplogin());
+                                navigateTo(context, HomeScreen());
                               },
                               child: Text(
                                 'Log In',

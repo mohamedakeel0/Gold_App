@@ -168,14 +168,13 @@ Widget defaultButton({
       width: width,
       height: 50.0,
 
-      child: SCOCAIL?Center(
-        child: MaterialButton(   onPressed: function,
-          padding: EdgeInsets.zero,
-          child: Text(
-            isUpperCase ? text.toUpperCase() : text,
-            style: TextStyle(
-              color: Textcolor,
-            ),
+      child: SCOCAIL?MaterialButton(   onPressed: function,
+        padding: EdgeInsets.zero,
+        child: Text(
+          isUpperCase ? text.toUpperCase() : text,textAlign: TextAlign.center,
+
+          style: TextStyle(
+            color: Textcolor,
           ),
         ),
       ):MaterialButton(

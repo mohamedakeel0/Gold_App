@@ -3,13 +3,14 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gold_app/modules/Login/cubic_login/Login.dart';
 import 'package:gold_app/modules/Regisiter/register.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
 import 'package:gold_app/shared/style/colors.dart';
 
-import 'cubic_login/cubic.dart';
-import 'cubic_login/states.dart';
-class Shoplogin extends StatelessWidget {
+import '../../modules/Login/cubic_login/cubic.dart';
+import '../../modules/Login/cubic_login/states.dart';
+class HomeScreen extends StatelessWidget {
 @override
 Widget build(BuildContext context) {
 
@@ -56,7 +57,11 @@ Widget build(BuildContext context) {
                         ),
                         SizedBox(
                           height: 30,
-                        ),defaultButton(function: (){}, text: 'Sign up with Email',shape: false,width: 350,Textcolor: Colors.black,isUpperCase: false),
+                        ),defaultButton(function: ()
+                        {
+                          navigateTo(context, Login_Screen());
+
+                        }, text: 'Sign up with Email',shape: false,width: 350,Textcolor: Colors.black,isUpperCase: false),
                         SizedBox(
                           height: 50,
                         ),

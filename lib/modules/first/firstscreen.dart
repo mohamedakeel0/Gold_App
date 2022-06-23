@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gold_app/modules/Login/Shoplogin.dart';
+import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
 import 'package:gold_app/shared/network/local/cache_helper.dart';
 import 'package:gold_app/shared/style/colors.dart';
@@ -31,7 +31,7 @@ class _OnboardingState extends State<Onboarding> {
       if (value) {
         navigateAndFinish(
           context,
-          Shoplogin(),
+          HomeScreen(),
         );
       }
     });
@@ -86,7 +86,7 @@ class _OnboardingState extends State<Onboarding> {
                   onPressed: () {
                     navigateAndFinish(
                         context,
-                        Shoplogin());
+                        HomeScreen());
                   },
                   child: Icon(Icons.arrow_forward_ios),
                 ),
