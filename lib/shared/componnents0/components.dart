@@ -228,7 +228,7 @@ Color chooseToastColor(Toaststates state){
   Color color;
 switch(state){
   case Toaststates.SUCCESS:
-    color =Colors.orangeAccent;
+    color =defaultcolor;
   break;
   case Toaststates.ERROR:
     color =Colors.red;
