@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
-import 'package:gold_app/shared/network/local/cache_helper.dart';
+
 import 'package:gold_app/shared/style/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -21,21 +21,7 @@ class _OnboardingState extends State<Onboarding> {
         title0: 'Goldgolio!',
         body: 'Let\'s Share your talent with world'),
   ];
-  bool islast = false;
-  void submit() {
-    CacheHelper.saveData(
-      key: 'onBoarding',
-      value: true,
-    ).then((value)
-    {
-      if (value) {
-        navigateAndFinish(
-          context,
-          HomeScreen(),
-        );
-      }
-    });
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +33,7 @@ class _OnboardingState extends State<Onboarding> {
             Expanded(
               child: PageView.builder(
                 onPageChanged: (index) {
-                  if (index == boarding.length - 1) {
-                    setState(() {
-                      islast = true;
-                    });
-                  } else {
-                    setState(() {
-                      islast = false;
-                    });
-                  }
+
                 },
                 physics: BouncingScrollPhysics(),
                 controller: boardController,

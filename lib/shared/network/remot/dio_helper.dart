@@ -16,7 +16,7 @@ class DioHelper {
       queryParameters: query,
 
     );
-    print(res.data);
+    print(res.statusCode);
     return res;
   }
 }

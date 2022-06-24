@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/SecondRegister.dart';
+import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
 import 'package:gold_app/shared/style/colors.dart';
 
@@ -11,7 +12,14 @@ import 'cubic/cubic.dart';
 import 'cubic/states.dart';
 
 class shop_register extends StatelessWidget {
-  const shop_register({Key? key}) : super(key: key);
+
+  final checkBoxList=[
+  Ckeckmodel(title: 'Talent'),
+    Ckeckmodel(title: 'Employer'),
+    Ckeckmodel(title: 'Individual'),
+    Ckeckmodel(title: 'Corporate'),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +94,7 @@ class shop_register extends StatelessWidget {
                               children: [
                                 defaultButtonSelect(
                                     function: () {},
-                                    text: 'Talent',
+                                    text: checkBoxList[0].title,value3: checkBoxList[0].value,ckeckmodel3:checkBoxList[0],context3:context,
                                     shape: false,
                                     width: 340,
                                     Textcolor: Colors.black,
@@ -97,7 +105,7 @@ class shop_register extends StatelessWidget {
                                   height: 10,
                                 ),
                                 defaultButtonSelect(
-                                    text2: 'Corporate',
+                                    text2: checkBoxList[1].title,value: checkBoxList[1].value,ckeckmodel:checkBoxList[1],context:context,
                                     height: ShopRegisterCubic.get(context)
                                         .showselect?50:100,
                                     function: () {},
@@ -105,8 +113,8 @@ class shop_register extends StatelessWidget {
                                         .showselect,
                                     function0: ShopRegisterCubic.get(context)
                                         .changeshowselect,
-                                    text: 'Employer',
-                                    text1: 'Individual',
+                                    text: checkBoxList[2].title,value1: checkBoxList[2].value,ckeckmodel1:checkBoxList[2],context1:context,
+                                    text1: checkBoxList[3].title,value2: checkBoxList[3].value,ckeckmodel2:checkBoxList[3],context2:context,
                                     shape: false,
                                     width: 340,
                                     Textcolor: Colors.black,

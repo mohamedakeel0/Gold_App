@@ -1,5 +1,7 @@
 
 
+
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
@@ -7,83 +9,16 @@ import 'package:flutter/material.dart';
 
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
+import 'package:gold_app/modules/Regisiter/cubic/cubic.dart';
 import 'package:gold_app/shared/style/colors.dart';
 
 
 
 
-Widget buildArticleItem(article, context) => InkWell(
-      onTap: () {
-        navigateTo(context, Widget);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Row(
-          children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                      image: NetworkImage("${article['urlToImage']}"),
-                      fit: BoxFit.cover)),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: Container(
-                height: 120,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "${article['title']}",
-                        style: Theme.of(context).textTheme.bodyText1,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Text(
-                      '${article['publishedAt']}',
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w300,
-                          fontSize: 10),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
 
-Widget myDivider() => Padding(
-      padding: const EdgeInsetsDirectional.only(
-        start: 20.0,
-      ),
-      child: Container(
-        width: double.infinity,
-        height: 1.0,
-        color: Colors.grey[300],
-      ),
-    );
 
-Widget articlebuilder(list, context,{isSearch=false}) => ConditionalBuilder(
-      condition: list.length > 0,
-      builder: (context) => ListView.separated(
-          physics: BouncingScrollPhysics(),
-          itemBuilder: (context, index) =>
-              buildArticleItem(list[index], context),
-          separatorBuilder: (context, index) => myDivider(),
-          itemCount: list.length),
-      fallback: (context) =>isSearch?Container():Center(child: CircularProgressIndicator()),
-    );
+
 Widget defaultFormField({
   required TextEditingController? controller,
   required TextInputType? type,
@@ -239,85 +174,7 @@ switch(state){
 }
 return color ;
 }
-Widget buildListProduct( model, context,{bool isOldprice=true}) => Padding(
-  padding: const EdgeInsets.all(20.0),
-  child: Container(
-    height: 120,
-    child: Row(
-      children: [
-        Stack(alignment: AlignmentDirectional.bottomStart, children: [
-          Image(
-            image: NetworkImage(
-              model.image,
-            ),
-            fit: BoxFit.cover,
-            height: 120,
-            width: 120,
-          ),
-          if (model.discount != 0&& isOldprice)
-            Container(
-              color: Colors.red,
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Text(
-                'DISCOUNT',
-                style: TextStyle(fontSize: 9, color: Colors.white),
-              ),
-            ),
-        ]),
-        SizedBox(
-          width: 20,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                model.name,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: Colors.black, fontSize: 9, height: 1),
-              ),
-              Spacer(),
-              Row(children: [
-                Text(
-                  model.price.toString(),
-                  style: TextStyle(fontSize: 10, color: defaultcolor),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                if (model.discount != 0&& isOldprice)
-                  Text(
-                    model.oldPrice.toString(),
-                    style: TextStyle(
-                        fontSize: 9,
-                        color: Colors.grey,
-                        decoration: TextDecoration.lineThrough),
-                  ),
-                Spacer(),
-                IconButton(
-                  onPressed: () {
 
-                  },
-                  icon: CircleAvatar(
-                    radius: 15.0,
-
-                    child: Icon(
-                      Icons.favorite_border,
-                      size: 14.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ]),
-            ],
-          ),
-        ),
-      ],
-    ),
-  ),
-);
 Widget defaultButtonSelect({
   double width = double.infinity,
   Color background = Colors.orangeAccent,
@@ -326,15 +183,30 @@ Widget defaultButtonSelect({
   double radius = 3.0,
 
   bool shape = true,
+  bool Arowa = false,
   bool SCOCAIL = true,
   ImageProvider? Image,
   double Imageradius = 10,
   required VoidCallback? function,
   required String text,
   double height = 50.0,
-   String? text1,
+  bool value =false,
+  bool value1 =false,
+  bool value2 =false,
+  bool value3 =false,
+  String? text1,
+  Ckeckmodel? ckeckmodel,
+  Ckeckmodel? ckeckmodel1,
+  Ckeckmodel? ckeckmodel2,
+  Ckeckmodel? ckeckmodel3,
+
    String? text2,
   VoidCallback? function0,
+  VoidCallback? functionaroow,
+  BuildContext? context,
+  BuildContext? context1,
+  BuildContext? context2,
+  BuildContext? context3,
   bool showselect = true,
 }) =>
     Container(clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -345,13 +217,10 @@ Widget defaultButtonSelect({
         crossAxisAlignment:
         CrossAxisAlignment.center,
         children: [
-          TextButton(
-              onPressed: () {
+          Container(height: 30,width:35,child: Checkbox(value:value3, onChanged: (value){
+            ShopRegisterCubic.get(context3).onItemclick(ckeckmodel3!);
 
-
-              },
-              child: Icon(Icons
-                  .check_box_outline_blank_sharp)),
+          } )),
           Expanded(
             child:  Text(
               isUpperCase ? text.toUpperCase() : text,
@@ -366,14 +235,11 @@ Widget defaultButtonSelect({
        showselect? Row(
           crossAxisAlignment:
           CrossAxisAlignment.center,
-          children: [
-            TextButton(
-                onPressed: () {
-                  function0!();
+          children: [Container(height: 30,width:35,child: Checkbox(value:value, onChanged: (value){
+              ShopRegisterCubic.get(context).onItemclick(ckeckmodel!);
+              function0!();
 
-                },
-                child: Icon(Icons
-                    .check_box_outline_blank_sharp)),
+            }, )),
             Expanded(
               child:  Text(
                 isUpperCase ? text.toUpperCase() : text,
@@ -391,7 +257,7 @@ Widget defaultButtonSelect({
                 child: Icon(
                   Icons.keyboard_arrow_down,
                   size: 25,
-                  color: defaultcolor,
+                  color: undefaultcolor,
                 ),
               ),
             ),
@@ -403,13 +269,11 @@ Widget defaultButtonSelect({
             crossAxisAlignment:
             CrossAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () {
-                    function0!();
+              Container(height: 30,width:35,child: Checkbox(value:value, onChanged: (value){
+                ShopRegisterCubic.get(context).onItemclick(ckeckmodel!);
+                function0!();
 
-                  },
-                  child: Icon(Icons
-                      .check_box_outline_blank_sharp)),
+              } )),
               Expanded(
                 child:  Text(
                   isUpperCase ? text.toUpperCase() : text,
@@ -423,6 +287,7 @@ Widget defaultButtonSelect({
                     right: 10),
                 child: InkWell(onTap:(){
                   function0!();
+
                 },
                   child: Icon(
                     Icons.keyboard_arrow_down,
@@ -437,13 +302,10 @@ Widget defaultButtonSelect({
             crossAxisAlignment:
             CrossAxisAlignment.center,
             children: [
-              TextButton(
-                  onPressed: () {
+              Container(height: 50,width:35,child: Checkbox(value:value2, onChanged: (value){
+                ShopRegisterCubic.get(context).onItemclick(ckeckmodel2!);
 
-
-                  },
-                  child: Icon(Icons
-                      .check_box_outline_blank_sharp)),
+              } )),
               Expanded(
                 child:  Text(
                   isUpperCase ? text1!.toUpperCase() : text1!,
@@ -458,11 +320,10 @@ Widget defaultButtonSelect({
                   crossAxisAlignment:
                   CrossAxisAlignment.center,
                   children: [
-                    TextButton(
-                        onPressed: () {
-                        },
-                        child: Icon(Icons
-                            .check_box_outline_blank_sharp)),
+                    Container(height: 50,width:35,child: Checkbox(value:value1, onChanged: (value){
+                      ShopRegisterCubic.get(context).onItemclick(ckeckmodel1!);
+
+                    } )),
                     Text(
                       text2!,
                       style: TextStyle(
