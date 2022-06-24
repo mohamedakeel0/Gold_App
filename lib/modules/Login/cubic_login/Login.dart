@@ -1,4 +1,5 @@
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +9,8 @@ import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 
 import 'package:gold_app/modules/Login/cubic_login/cubic.dart';
 import 'package:gold_app/modules/Login/cubic_login/states.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:gold_app/modules/Regisiter/register.dart';
+
+
 import 'package:gold_app/shared/componnents0/components.dart';
 import 'package:gold_app/shared/style/colors.dart';
 
@@ -67,7 +68,11 @@ class Login_Screen extends StatelessWidget {
                         defaultFormField(
                             controller: emailController,
                             type: TextInputType.emailAddress,
-                            validate: EmailValidator(errorText:'please enter your email address' ),
+                            validate: (value){
+                              if(value==null || !EmailValidator.validate(value)){
+                                return 'please enter your email address';
+                              }
+                            },
                             label: 'Email Address or Moblie number',
                             prefix: Icons.email_outlined),
                         SizedBox(
@@ -83,10 +88,10 @@ class Login_Screen extends StatelessWidget {
                             },
                             type: TextInputType.visiblePassword,
                             validate: (value) {
-                              if (value!.isEmpty&&value.length>8
+                              if (value!.isEmpty
                               ) {
                                 return 'Invalid password!';
-                              }else{
+                              }else if(value.length<8){
                                 return 'Password too short!';
                               }
                             },
@@ -94,20 +99,19 @@ class Login_Screen extends StatelessWidget {
                             prefix: Icons.lock_outline),
                          FlutterPwValidator(
                             controller: passwordController,
-                            minLength: 3,
 
-                            specialCharCount: 1,successColor: defaultcolor,
+
+                       successColor: defaultcolor,
                             width: 300,
                             height: 40,
                             onSuccess: (){
                               print("MATCHED");
-                              ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                                  content: new Text("Password is matched")));
+
                             }
                             ,
                             onFail: (){
                               print("NOT MATCHED");
-                            }
+                            }, minLength:3,
                         ),
 
                         SizedBox(
@@ -116,7 +120,7 @@ class Login_Screen extends StatelessWidget {
                         Row(crossAxisAlignment: CrossAxisAlignment.start,children: [
                           defaultButton(
                               function: () {
-                                navigateTo(context, shop_register());
+                                navigateTo(context, HomeScreen());
                               },
                               text: 'back',
                               shape: false,
