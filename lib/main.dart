@@ -10,6 +10,7 @@ import 'package:gold_app/shared/network/remot/dio_helper.dart';
 import 'package:gold_app/shared/style/Theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'layout/cubic/states.dart';
 import 'modules/Regisiter/cubic/cubic.dart';
 import 'modules/first/firstscreen.dart';
 
@@ -20,9 +21,7 @@ void main() async{
   Bloc.observer = MyBlocObserver();
 
   DioHelper.init();
-  await CacheHelper.init();
-  Widget widget;
-  dynamic onBoarding=CacheHelper.getData(key: 'onBoarding');
+
   runApp(const MyApp());
 }
 
@@ -39,12 +38,11 @@ class MyApp extends StatelessWidget {
 
         ),
 
-        BlocProvider(
-            create: (context) => AppCubit()),
+
         BlocProvider(
             create: (context) =>  ShopRegisterCubic()),
       ],
-      child: BlocConsumer<AppCubit, AppStates>(
+      child: BlocConsumer<ShopCubic, ShopStates>(
         listener: (context, state) {},
         builder: (context, state) {
           return MaterialApp(

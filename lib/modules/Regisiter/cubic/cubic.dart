@@ -44,6 +44,7 @@ class ShopRegisterCubic extends Cubit<ShopRegisterStates> {
     showselect = !showselect;
 
     emit(ShopChangeshowselectState());}
+
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
   onItemclick(Ckeckmodel ckeckmodel ){
