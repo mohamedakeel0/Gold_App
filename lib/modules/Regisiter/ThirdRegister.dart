@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/models/ModelRegister.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
+import 'package:gold_app/modules/Regisiter/SecondRegister.dart';
 import 'package:gold_app/modules/Regisiter/register.dart';
 import 'package:gold_app/modules/first/firstscreen.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
@@ -21,6 +22,30 @@ class Third_register extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
+    final checkBoxList0=[
+      Ckeckmodel(title: 'Director'),
+      Ckeckmodel(title: 'Videographer'),
+      Ckeckmodel(title: 'Editor'),
+      Ckeckmodel(title: 'Singer'),
+      Ckeckmodel(title: 'Colorist'),
+      Ckeckmodel(title: 'Sound Engineer'),
+      Ckeckmodel(title: 'Writter'),
+      Ckeckmodel(title: 'Production Manager'),
+      Ckeckmodel(title: 'Voice Over'),
+      Ckeckmodel(title: 'Other'),
+    ];
+    final checkBoxList=[
+      Ckeckmodel(title: 'Actor'),
+      Ckeckmodel(title: 'Photographer'),
+      Ckeckmodel(title: 'Graphic Designer'),
+      Ckeckmodel(title: 'Art Director'),
+      Ckeckmodel(title: 'Stylist & Fashion'),
+      Ckeckmodel(title: 'Makeup Artist'),
+      Ckeckmodel(title: 'Journalist'),
+      Ckeckmodel(title: 'Football player'),
+      Ckeckmodel(title: 'Model'),
+      Ckeckmodel(title: 'Producer'),
+    ];
 
     return BlocProvider(
       create: (context) => ShopRegisterCubic(),
@@ -63,22 +88,21 @@ class Third_register extends StatelessWidget {
                             child: ListView.separated(
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              separatorBuilder: (context, index) => Container(height: 10,),
+                              separatorBuilder: (context, index) => Container(),
                               itemBuilder: (context, index) {
 
                                 return
                                   Row(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                    CrossAxisAlignment.center,
                                     children: [
-                                      InkWell(onTap:(){
-                                        talents.add(titles[index]);
-                                      },
-                                        child: Icon(Icons
-                                            .check_box_outline_blank_sharp,color: Colors.grey,),
-                                      ),
+                                      Container(height: 30,width:35,child: Checkbox(value:checkBoxList[index].value, onChanged: (value){
+                                        ShopRegisterCubic.get(context).onItemclick(checkBoxList[index]);
+                                        talents.add(checkBoxList[index].title);
+
+                                      } , )),
                                       Text(
-                                        '${titles[index]}',
+                                        checkBoxList[index].title,
                                         maxLines: 2,
                                         style: Theme.of(context)
                                             .textTheme
@@ -91,44 +115,42 @@ class Third_register extends StatelessWidget {
                                     ],
                                   );
                               },
-                              itemCount: titles.length,
+                              itemCount: checkBoxList.length,
                             ),
                           ),
                           Container(width: 185,
                             child: ListView.separated(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            separatorBuilder: (context, index) => Container(height: 10,),
-                            itemBuilder: (context, index) {
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) => Container(),
+                              itemBuilder: (context, index) {
 
-                              return
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    InkWell(onTap:(){
-                                      talents.add(titles0[index]);
+                                return
+                                  Row(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      Container(height: 30,width:35,child: Checkbox(value:checkBoxList0[index].value, onChanged: (value){
+                                        ShopRegisterCubic.get(context).onItemclick(checkBoxList0[index]);
+                                        talents.add(checkBoxList[index].title);
+                                      } )),
+                                      Text(
+                                        checkBoxList0[index].title,
+                                        maxLines: 2,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline4!
+                                            .copyWith(
+                                            color: Colors.black,
+                                            fontSize: 15),
+                                      ),
 
-                                    },
-                                      child: Icon(Icons
-                                          .check_box_outline_blank_sharp,color: Colors.grey,),
-                                    ),
-                                    AutoSizeText(
-                                      '${titles0[index]}',
-                                      maxLines: 2,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline4!
-                                          .copyWith(
-                                          color: Colors.black,
-                                          fontSize: 15),
-                                    ),
-
-                                  ],
-                                );
-                            },
-                            itemCount: titles0.length,
-                          ),)
+                                    ],
+                                  );
+                              },
+                              itemCount: checkBoxList0.length,
+                            ),
+                          ),
                         ],),
                       SizedBox(
                         height: 20,
@@ -136,7 +158,7 @@ class Third_register extends StatelessWidget {
                       Row(crossAxisAlignment: CrossAxisAlignment.start,children: [
                         defaultButton(
                             function: () {
-                              print(talents);
+                              navigateTo(context, Onboarding());
                             },
                             text: 'back',
                             shape: false,
@@ -147,8 +169,25 @@ class Third_register extends StatelessWidget {
                             background: Colors.amberAccent.shade100),SizedBox(width: 100,),
                         defaultButton(
                             function: () {
-                              ShopRegisterCubic.get(context).userRegister(email: modelTalents.email,gender:modelTalents.gender ,phone:modelTalents.phone ,password:modelTalents.password ,name: modelTalents.fullName,talents:talents );
-                              navigateTo(context, Onboarding());
+                              print(talents.length);
+                              if(talents.length==3) {
+                                ShopRegisterCubic.get(context).userRegister(
+                                    email: modelTalents.email,
+                                    gender: modelTalents.gender,
+                                    phone: modelTalents.phone,
+                                    password: modelTalents.password,
+                                    name: modelTalents.fullName,
+                                    talents: talents);
+                                ShowToast(
+                                    text: 'Success', state: Toaststates.SUCCESS);
+                                navigateTo(context, Onboarding());
+                              }else{
+
+                                talents.clear();
+                                ShowToast(
+                                    text: 'Maxmum of 3 talent can be selected', state: Toaststates.ERROR);
+                                navigateTo(context, Second_register());
+                              }
                             },
                             text: 'next',
                             shape: false,
@@ -192,33 +231,20 @@ class Third_register extends StatelessWidget {
     );
 
   }
+
+
+
   List<String> talents = [];
 
-  List<String> titles = [
-    'Actor ',
-    'Photographer ',
-    'Graphic Designer ',
-    'Art Director ',
-    'Stylist & Fashion ',
-    'Makeup Artist ',
-    'Journalist ',
-    'Football player ',
-    'Model ',
-    'Producer  ',
 
-  ];
 
-  List<String> titles0 = [
-    'Director ',
-    'Videographer ',
-    'Editor ',
-    'Singer ',
-    'Colorist ',
-    'Sound Engineer ',
-    'Writter ',
-    'Production Manager ',
-    'Voice Over ',
-    'Other  ',
 
-  ];
+
+}
+class Ckeckmodel{
+  String title;
+  bool value;
+
+  Ckeckmodel({required this.title, this.value=false});
+
 }

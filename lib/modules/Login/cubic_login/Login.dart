@@ -114,7 +114,8 @@ class Login_Screen extends StatelessWidget {
                               function: () {
                                 if (formkey.currentState!.validate()) {
                                   ShoploginCubic.get(context).userLogin(email:emailController.text ,password:passwordController.text ,);
-
+                                  ShowToast(
+                                      text: 'Success', state: Toaststates.SUCCESS);
 
 
                                 }},

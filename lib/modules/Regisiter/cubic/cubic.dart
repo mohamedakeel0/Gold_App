@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/models/ModelRegister.dart';
+import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
 import 'package:gold_app/modules/Regisiter/cubic/states.dart';
 import 'package:gold_app/shared/network/End_point.dart';
 import 'package:gold_app/shared/network/remot/dio_helper.dart';
@@ -45,7 +46,10 @@ class ShopRegisterCubic extends Cubit<ShopRegisterStates> {
     emit(ShopChangeshowselectState());}
   IconData suffix = Icons.visibility_outlined;
   bool isPassword = true;
-
+  onItemclick(Ckeckmodel ckeckmodel ){
+    ckeckmodel.value=!ckeckmodel.value;
+    emit(ShopChangeonItemclickState());
+  }
   void changePasswordvisibility() {
     isPassword = !isPassword;
     suffix = isPassword ? Icons.visibility_outlined : Icons.visibility_off;
