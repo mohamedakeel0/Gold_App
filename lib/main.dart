@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/layout/cubic/cubic.dart';
 import 'package:gold_app/shared/bloc_observer/blocObserver.dart';
-import 'package:gold_app/shared/cubic_to_mode/cubic.dart';
-import 'package:gold_app/shared/cubic_to_mode/states.dart';
-import 'package:gold_app/shared/network/local/cache_helper.dart';
+
 import 'package:gold_app/shared/network/remot/dio_helper.dart';
 import 'package:gold_app/shared/style/Theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
