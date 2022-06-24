@@ -3,6 +3,8 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:gold_app/models/ModelRegister.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
@@ -58,7 +60,7 @@ class Second_register extends StatelessWidget {
                             controller: nameController,
                             type: TextInputType.name,
                             validate: (value) {
-                              if (value.isEmpty) {
+                              if (value!.isEmpty) {
                                 return 'please enter your name';
                               }
                             },
@@ -70,11 +72,8 @@ class Second_register extends StatelessWidget {
                         defaultFormField(
                             controller: emailController,
                             type: TextInputType.emailAddress,
-                            validate: (value) {
-                              if (value.isEmpty) {
-                                return 'please enter your email address';
-                              }
-                            },
+                            validate:  EmailValidator(errorText:'please enter your email address' ),
+
                             label: 'Email Address or Moblie number',
                             prefix: Icons.email_outlined),
                         SizedBox(
@@ -90,12 +89,32 @@ class Second_register extends StatelessWidget {
                             },
                             type: TextInputType.visiblePassword,
                             validate: (value) {
-                              if (value.isEmpty) {
-                                return 'password is too short ';
+                              if (value!.isEmpty&&value.length<8
+                              ) {
+                                return 'Invalid password!';
+                              }else{
+                                return 'Password too short!';
                               }
                             },
                             label: 'password',
                             prefix: Icons.lock_outline),
+                        FlutterPwValidator(
+                            controller: passwordController,
+                            minLength: 3,
+
+                            specialCharCount: 1,successColor: defaultcolor,
+                            width: 250,
+                            height:40,
+                            onSuccess: (){
+                              print("MATCHED");
+                              ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+                                  content: new Text("Password is matched")));
+                            }
+                            ,
+                            onFail: (){
+                              print("NOT MATCHED");
+                            }
+                        ),
                         SizedBox(
                           height: 15,
                         ),
@@ -106,7 +125,7 @@ class Second_register extends StatelessWidget {
 
                             type: TextInputType.text,
                             validate: (value) {
-                              if (value.isEmpty) {
+                              if (value!.isEmpty) {
                                 return 'Enter Gender ';
                               }
                             },
@@ -122,7 +141,7 @@ class Second_register extends StatelessWidget {
 
                             type: TextInputType.text,
                             validate: (value) {
-                              if (value.isEmpty) {
+                              if (value!.isEmpty) {
                                 return 'Enter Phone ';
                               }
                             },

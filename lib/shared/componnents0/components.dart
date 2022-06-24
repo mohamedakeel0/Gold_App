@@ -29,7 +29,7 @@ Widget defaultFormField({
   bool isPassword = false,
   ValueChanged? change,
   VoidCallback? suffixPressed,
-  required FormFieldValidator validate,
+  required FormFieldValidator<String> validate,
   required String? label,
   IconData? prefix,
 
@@ -37,6 +37,7 @@ Widget defaultFormField({
   ValueChanged? onSubmit,
   IconData? suffix,
   bool isClickable = true,
+  int?maxlength,
   GestureTapCallback? TapWhenClick,
 
 }) =>
@@ -48,7 +49,7 @@ Widget defaultFormField({
       obscureText: isPassword,
       validator: validate,
       enabled: isClickable,
-      onChanged: change,
+      onChanged: change,maxLength: maxlength,
      onFieldSubmitted: onSubmit,
       decoration: InputDecoration(
         enabledBorder: enabledBorder,
