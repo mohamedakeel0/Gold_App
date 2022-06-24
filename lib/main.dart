@@ -6,7 +6,7 @@ import 'package:gold_app/shared/bloc_observer/blocObserver.dart';
 
 import 'package:gold_app/shared/network/remot/dio_helper.dart';
 import 'package:gold_app/shared/style/Theme.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 import 'layout/cubic/states.dart';
 import 'modules/Regisiter/cubic/cubic.dart';
@@ -14,7 +14,7 @@ import 'modules/first/firstscreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.getInstance();
+
 
   Bloc.observer = MyBlocObserver();
 

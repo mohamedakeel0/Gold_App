@@ -48,6 +48,8 @@ dependencies:
   curved_navigation_bar:
   smooth_page_indicator:
   auto_size_text:
+  form_field_validator:
+  flutter_pw_validator:
 dev_dependencies:
   flutter_test:
     sdk: flutter

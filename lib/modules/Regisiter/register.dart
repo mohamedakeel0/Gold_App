@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
+import 'package:gold_app/modules/Login/cubic_login/Login.dart';
 import 'package:gold_app/modules/Regisiter/SecondRegister.dart';
 import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
 import 'package:gold_app/shared/componnents0/components.dart';
@@ -176,7 +177,7 @@ class shop_register extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      navigateTo(context, HomeScreen());
+                                      navigateTo(context, Login_Screen());
                                     },
                                     child: Text(
                                       'Log In',
