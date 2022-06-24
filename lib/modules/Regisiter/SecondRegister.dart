@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
-
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+
 import 'package:gold_app/models/ModelRegister.dart';
 import 'package:gold_app/layout/Homescreen/HomeScreen.dart';
 import 'package:gold_app/modules/Regisiter/ThirdRegister.dart';
@@ -72,7 +70,11 @@ class Second_register extends StatelessWidget {
                         defaultFormField(
                             controller: emailController,
                             type: TextInputType.emailAddress,
-                            validate:  EmailValidator(errorText:'please enter your email address' ),
+                            validate: (value){
+                              if(value==null || !EmailValidator.validate(value)){
+                                return 'please enter your email address';
+                              }
+                            },
 
                             label: 'Email Address or Moblie number',
                             prefix: Icons.email_outlined),
@@ -89,10 +91,10 @@ class Second_register extends StatelessWidget {
                             },
                             type: TextInputType.visiblePassword,
                             validate: (value) {
-                              if (value!.isEmpty&&value.length<8
+                              if (value!.isEmpty
                               ) {
                                 return 'Invalid password!';
-                              }else{
+                              }else if(value.length<8){
                                 return 'Password too short!';
                               }
                             },
@@ -102,13 +104,12 @@ class Second_register extends StatelessWidget {
                             controller: passwordController,
                             minLength: 3,
 
-                            specialCharCount: 1,successColor: defaultcolor,
+                          successColor: defaultcolor,
                             width: 250,
                             height:40,
                             onSuccess: (){
                               print("MATCHED");
-                              ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-                                  content: new Text("Password is matched")));
+
                             }
                             ,
                             onFail: (){
@@ -139,7 +140,7 @@ class Second_register extends StatelessWidget {
 
                             controller: PhoneController,
 
-                            type: TextInputType.text,
+                            type: TextInputType.phone,
                             validate: (value) {
                               if (value!.isEmpty) {
                                 return 'Enter Phone ';
@@ -166,6 +167,7 @@ class Second_register extends StatelessWidget {
                               function: () {
     if (formkey.currentState!.validate()) {
       int phone=int.parse(PhoneController.text);
+
       ModelTalents model=ModelTalents(password:passwordController.text ,email:emailController.text ,phone:phone ,fullName: nameController.text,gender: GenderController.text,);
       navigateTo(context, Third_register(modelTalents:model));
 

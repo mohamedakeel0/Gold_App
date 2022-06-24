@@ -170,7 +170,7 @@ class Third_register extends StatelessWidget {
                         defaultButton(
                             function: () {
                               print(talents.length);
-                              if(talents.length==3) {
+                              if(talents.length<=3) {
                                 ShopRegisterCubic.get(context).userRegister(
                                     email: modelTalents.email,
                                     gender: modelTalents.gender,
@@ -182,11 +182,11 @@ class Third_register extends StatelessWidget {
                                     text: 'Success', state: Toaststates.SUCCESS);
                                 navigateTo(context, Onboarding());
                               }else{
-
+                                navigateTo(context, Third_register(modelTalents: modelTalents,));
                                 talents.clear();
                                 ShowToast(
                                     text: 'Maxmum of 3 talent can be selected', state: Toaststates.ERROR);
-                                navigateTo(context, Second_register());
+
                               }
                             },
                             text: 'next',
